@@ -22,7 +22,7 @@ const io = require('socket.io')(server, {
 });
 
 // DB
-require("./db/init.mysql");
+require("./config/database");
 
 // MQTT
 require("./services/mqtt.service");

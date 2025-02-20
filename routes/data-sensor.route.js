@@ -1,9 +1,9 @@
 const express = require('express');
-const { getAllDataSensor } = require('../controllers/dataSensor.controller');
+const { searchDataSensors } = require('../controllers/data-sensor.controller');
 const router = express.Router();
 const { authentication } = require("../auth/authUtils")
 
 router.use(authentication);
-router.get('/', getAllDataSensor);
+router.get('/search', searchDataSensors);
 
 module.exports = router;
