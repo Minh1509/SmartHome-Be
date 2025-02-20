@@ -1,5 +1,5 @@
 const mqtt = require('mqtt');
-const dbConn = require('../db/init.mysql'); // Adjust the path as necessary
+const dbConn = require('../config/database'); // Adjust the path as necessary
 const config = require('../config/config.service');
 const io = require('socket.io')(3000, {
     cors: {
