@@ -1,7 +1,7 @@
 const mqtt = require('mqtt');
 const dbConn = require('../config/database'); // Adjust the path as necessary
 const config = require('../config/config.service');
-const io = require('socket.io')(3000, {
+const io = require('socket.io')(config.PORT_SOCKET, {
     cors: {
         origin: 'http://localhost:3000',
     },
