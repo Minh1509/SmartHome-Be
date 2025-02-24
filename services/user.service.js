@@ -3,7 +3,7 @@ class UserService {
     constructor() {
         this.users = [
             { username: 'minh', password: 'minh', email: "nguyenquangminh15092003@gmail.com" },
-            { username: 'dong', password: 'dong', email: "dong@gmail.com" },
+            { username: 'dong', password: 'dong', email: "ndinhdong.1808@gmail.com" },
             { username: 'hieu', password: 'hieu', email: "hieu@gmail.com" },
             { username: 'hoang', password: 'hoang', emial: "hoang@gmail.com" }
         ];

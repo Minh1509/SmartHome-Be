@@ -6,7 +6,7 @@ class UserController {
         const result = await UserService.login(req.body);
         res.status(200).json({
             code: 200,
-            message: "Loginb success",
+            message: "Login success",
             data: result,
 
         });
