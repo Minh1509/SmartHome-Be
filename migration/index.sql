@@ -1,3 +1,4 @@
+create database smarthome;
 use smarthome;
 CREATE TABLE IF NOT EXISTS data_sensors (
     id INT AUTO_INCREMENT PRIMARY KEY,
