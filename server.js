@@ -30,6 +30,23 @@ require("./services/mqtt.service");
 // Router
 app.use("/", require("./routes/index"))
 
+// Handle exception
+app.use((req, res, next) => {
+    const error = new Error("Not Found");
+    error.status = 404;
+    next(error);
+});
+
+app.use((error, req, res, next) => {
+    const statusCode = error.status || 404;
+    return res.status(statusCode).json({
+        status: "error",
+        code: statusCode,
+        stack: error.stack,
+        message: error.message || "Internal Server Error",
+    });
+});
+
 const PORT = config.PORT
 server.listen(PORT, function () {
     console.log(`Server is running on port: ${PORT}`)
