@@ -2,10 +2,10 @@ const DataSensorService = require('../services/data-sensor.service');
 
 const searchDataSensors = async (req, res) => {
     try {
-        const { temperature, humidity, light, query, sortField = 'id', sortDirection = 'ASC', pageNumber = 1, pageSize = 10 } = req.query;
+        const { type = 'all', query, sortField = 'id', sortDirection = 'ASC', pageNumber = 1, pageSize = 10 } = req.query;
 
         const sensors = await DataSensorService.searchDataSensorByType(
-            temperature, humidity, light, query, sortField, sortDirection, pageNumber, pageSize
+            type, query, sortField, sortDirection, pageNumber, pageSize
         );
 
         res.status(200).json({ success: true, data: sensors });
@@ -17,4 +17,4 @@ const searchDataSensors = async (req, res) => {
 
 
 
-module.exports = {  searchDataSensors };
+module.exports = { searchDataSensors };
