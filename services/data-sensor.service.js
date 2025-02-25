@@ -4,7 +4,7 @@ class DataSensorService {
 
 
     static async searchDataSensorByType(type, query, sortField, sortDirection, pageNumber, pageSize) {
-        const validFields = ["id", "temperature", "humidity", "light"];
+        const validFields = ["id", "temperature", "humidity", "light", "createdAt"];
         if (!validFields.includes(sortField)) {
             throw new Error(`Invalid sort field: ${sortField}`);
         }
