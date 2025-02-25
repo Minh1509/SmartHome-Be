@@ -1,6 +1,6 @@
 const nodemailer = require("nodemailer");
 const config = require("../config/config.service");
-const transporter = nodemailer.createTransport({ // config mail server
+const transporter = nodemailer.createTransport({
     host: config.EMAIL_HOST,
     port: +config.EMAIL_PORT,
     secure: true,
@@ -13,15 +13,19 @@ const transporter = nodemailer.createTransport({ // config mail server
     }
 });
 
-const sendEmail = async (to) => {
+const TypeWaring = {
+    temperature: 'Nhiệt độ',
+    humidity: "Độ ẩm",
+    light: 'Ánh sáng'
+}
+const sendEmail = async (to, type, value) => {
     try {
-        const temperature = 35
-        const subject = "Cảnh báo: Nhiệt độ vượt ngưỡng!";
+        const subject = `Cảnh báo: ${TypeWaring[type]} vượt ngưỡng!`;
         const html = `
             <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb;">
-                <h2 style="color: #721c24;">⚠ Cảnh báo Nhiệt độ Cao!</h2>
-                <p>Nhiệt độ hiện tại đã vượt quá ngưỡng 35°C.</p>
-                <p><strong>Nhiệt độ hiện tại:</strong> ${temperature}°C</p>
+                <h2 style="color: #721c24;">⚠ Cảnh báo ${TypeWaring[type]} Cao!</h2>
+                <p>${TypeWaring[type]} hiện tại đã vượt quá ngưỡng 35°C.</p>
+                <p><strong>${TypeWaring[type]} hiện tại:</strong> ${value}°C</p>
                 <p>Vui lòng kiểm tra và có biện pháp xử lý kịp thời.</p>
             </div>
         `;
