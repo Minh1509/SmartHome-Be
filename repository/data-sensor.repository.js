@@ -9,18 +9,19 @@ class DataSensorRepository {
         let params = [];
         let countParams = [];
 
-        if (type !== 'all') {
+        if (type !== 'all' && query) {
             sql += ` AND ${type} LIKE ?`;
             countSql += ` AND ${type} LIKE ?`;
             params.push(`%${query}%`);
             countParams.push(`%${query}%`);
         }
-        else {
+        else if (type === 'all' && query) {
             sql += ` AND (temperature LIKE ? OR humidity LIKE ? OR light LIKE ? OR DATE_FORMAT(createdAt, '%d-%m-%Y %H:%i:%s') LIKE ?)`;
             countSql += ` AND (temperature LIKE ? OR humidity LIKE ? OR light LIKE ? OR DATE_FORMAT(createdAt, '%d-%m-%Y %H:%i:%s') LIKE ?)`;
             params.push(`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`);
             countParams.push(`%${query}%`, `%${query}%`, `%${query}%`, `%${query}%`);
         }
+
 
         const [countResult] = await db.query(countSql, countParams);
         const totalRecords = countResult[0].totalRecords;
