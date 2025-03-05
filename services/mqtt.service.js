@@ -64,7 +64,7 @@ io.on("connection", function (socket) {
             client.publish("relay_1", "1"); //pub sang bên esp
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'LED' , 'ON') "
+                    "insert into history_actions(device, action) value ( 'LED' , 'ON') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
@@ -73,7 +73,7 @@ io.on("connection", function (socket) {
             client.publish("relay_1", "0");
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'LED' , 'OFF') "
+                    "insert into history_actions(device, action) value ( 'LED' , 'OFF') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
@@ -86,7 +86,7 @@ io.on("connection", function (socket) {
             client.publish("relay_2", "1");
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'FAN' , 'ON') "
+                    "insert into history_actions(device, action) value ( 'FAN' , 'ON') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
@@ -95,7 +95,7 @@ io.on("connection", function (socket) {
             client.publish("relay_2", "0");
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'FAN' , 'OFF') "
+                    "insert into history_actions(device, action) value ( 'FAN' , 'OFF') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
@@ -108,7 +108,7 @@ io.on("connection", function (socket) {
             client.publish("relay_3", "1");
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'AC' , 'ON') "
+                    "insert into history_actions(device, action) value ( 'AC' , 'ON') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
@@ -117,7 +117,7 @@ io.on("connection", function (socket) {
             client.publish("relay_3", "0");
             try {
                 await dbConn.query(
-                    "insert into relay(relay_id, state) value ( 'AC' , 'OFF') "
+                    "insert into history_actions(device, action) value ( 'AC' , 'OFF') "
                 );
             } catch (err) {
                 console.error("Database insert error:", err);
