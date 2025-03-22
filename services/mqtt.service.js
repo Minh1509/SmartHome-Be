@@ -28,20 +28,35 @@ client.on("message", async function (topic, message) {
     var humi_data = data.humidity;
     var light_data = Math.floor(Math.round(data.light));
 
-    //cho giá trị vào bảng data trên mysql
-    var sql =
-        "INSERT INTO data_sensors (temperature, humidity, light) VALUES (?, ?, ?)";
+
+    var sql1 = "INSERT INTO data_sensors (temperature, humidity, light) VALUES (?, ?, ?)";
+    var sql2 = "INSERT INTO history_actions (device, action) VALUES (?, ?)";
 
     try {
-        await dbConn.query(sql, [temp_data, humi_data, light_data]);
+        // Chèn dữ liệu vào bảng data_sensors
+        await dbConn.query(sql1, [temp_data, humi_data, light_data]);
+
+        // Kiểm tra trạng thái của relay để ghi vào bảng history_actions
+        if (state_1 == "1") {
+            await dbConn.query(sql2, ["LED", "ON"]);
+        } else {
+            await dbConn.query(sql2, ["LED", "OFF"]);
+        }
+
+        if (state_2 == "1") {
+            await dbConn.query(sql2, ["FAN", "ON"]);
+        } else {
+            await dbConn.query(sql2, ["FAN", "OFF"]);
+        }
+
+        if (state_3 == "1") {
+            await dbConn.query(sql2, ["AC", "ON"]);
+        } else {
+            await dbConn.query(sql2, ["AC", "OFF"]);
+        }
+
         console.log(
-            " temp : " +
-            temp_data +
-            " ,humi: " +
-            humi_data +
-            ", light: " +
-            light_data +
-            " "
+            `temp: ${temp_data}, humi: ${humi_data}, light: ${light_data}, state_1: ${state_1}, state_2: ${state_2}, state_3: ${state_3}`
         );
     } catch (err) {
         console.error("Database insert error:", err);
